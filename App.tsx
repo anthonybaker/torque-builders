@@ -72,37 +72,6 @@ const App: React.FC = () => {
 
   return (
     <div className={`min-h-screen bg-brand-black text-white selection:bg-brand-rust selection:text-white transition-colors duration-500 ${isEasterEggActive ? 'bg-brand-teal/20' : ''}`}>
-      <style>{`
-        @keyframes waveSweep {
-          0% { transform: translateX(-100%) skewX(-20deg); opacity: 0; }
-          50% { opacity: 1; }
-          100% { transform: translateX(200%) skewX(-20deg); opacity: 0; }
-        }
-        .neon-wave {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 50%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, #00F5FF, transparent);
-          z-index: 9999;
-          pointer-events: none;
-          animation: waveSweep 1.5s ease-in-out forwards;
-          box-shadow: 0 0 100px #00F5FF;
-        }
-        .flicker-text {
-          animation: flameFlicker 0.15s infinite alternate;
-        }
-        @keyframes flameFlicker {
-          0% { opacity: 1; transform: scale(1); filter: blur(0px) brightness(1); }
-          50% { opacity: 0.85; transform: scale(1.01) translateY(-1px); filter: blur(1px) brightness(1.2); }
-          100% { opacity: 0.95; transform: scale(0.99) translateX(1px); filter: blur(0.5px) brightness(1.1); }
-        }
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-
       {/* Easter Egg Overlay */}
       {isEasterEggActive && (
         <>

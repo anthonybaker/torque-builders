@@ -1,0 +1,85 @@
+
+/* Global Styles */
+body {
+    background-color: #0D0D0D;
+    color: #E5E5E5;
+    overflow-x: hidden;
+}
+
+/* Background Scanline Animation */
+.scanline {
+    width: 100%;
+    height: 100px;
+    z-index: 100;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0.1;
+    position: absolute;
+    bottom: 100%;
+    pointer-events: none;
+    animation: scanline 6s linear infinite;
+}
+
+@keyframes scanline {
+    0% { bottom: 100%; }
+    100% { bottom: -100px; }
+}
+
+/* Glow Effects */
+.glow-green {
+    box-shadow: 0 0 15px rgba(102, 142, 35, 0.4);
+}
+.glow-rust {
+    box-shadow: 0 0 20px rgba(183, 65, 2, 0.3);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0D0D0D; }
+::-webkit-scrollbar-thumb { background: #4A7C73; border-radius: 0; }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Industrial Border Styling */
+.industrial-border {
+    border: 1px solid rgba(140, 85, 47, 0.2);
+    position: relative;
+}
+
+.industrial-border::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px; width: 10px; height: 10px;
+    border-top: 2px solid #B74102; border-left: 2px solid #B74102;
+}
+
+/* Easter Egg Animations */
+@keyframes waveSweep {
+  0% { transform: translateX(-100%) skewX(-20deg); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(200%) skewX(-20deg); opacity: 0; }
+}
+
+.neon-wave {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #00F5FF, transparent);
+  z-index: 9999;
+  pointer-events: none;
+  animation: waveSweep 1.5s ease-in-out forwards;
+  box-shadow: 0 0 100px #00F5FF;
+}
+
+.flicker-text {
+  animation: flameFlicker 0.15s infinite alternate;
+}
+
+@keyframes flameFlicker {
+  0% { opacity: 1; transform: scale(1); filter: blur(0px) brightness(1); }
+  50% { opacity: 0.85; transform: scale(1.01) translateY(-1px); filter: blur(1px) brightness(1.2); }
+  100% { opacity: 0.95; transform: scale(0.99) translateX(1px); filter: blur(0.5px) brightness(1.1); }
+}
