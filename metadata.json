@@ -1,0 +1,8 @@
+{
+  "name": "TORQUE BUILDERS",
+  "description": "A state-of-the-art storefront for the Agentic AI Builders community, featuring a deep-integrated Gemini assistant.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
