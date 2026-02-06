@@ -3,13 +3,29 @@ import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { Product } from "../types";
 
 export class GeminiService {
-  private ai: GoogleGenAI;
+  private ai: GoogleGenAI | null = null;
 
   constructor() {
-    this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    try {
+      // Safely check for the API key to prevent instantiation errors
+      const apiKey = process.env.API_KEY;
+      if (!apiKey || apiKey === 'undefined' || apiKey.trim() === '') {
+        console.warn("Gemini Service: No valid API_KEY found in environment variables.");
+        return;
+      }
+      
+      this.ai = new GoogleGenAI({ apiKey });
+    } catch (error) {
+      console.error("Gemini Service: Failed to initialize GoogleGenAI.", error);
+    }
   }
 
   async getChatResponse(message: string, products: Product[], history: { role: string; text: string }[] = []) {
+    // Gracefully handle missing AI instance
+    if (!this.ai) {
+      return "ERROR: SECURE_LINK_MISSING. API key not configured. Ensure environment variables are active to engage [TORQUE_UNIT].";
+    }
+
     const productContext = products.map(p => 
       `- ${p.name} (ID: ${p.id}): ${p.description}. Price: $${p.price}`
     ).join('\n');
@@ -48,7 +64,7 @@ export class GeminiService {
         ],
         config: {
           systemInstruction,
-          temperature: 0.4, // Lower temperature for more unyielding, subtractive focus
+          temperature: 0.4,
         }
       });
 
